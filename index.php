@@ -200,7 +200,7 @@ $productos_destacados = $pdo->query("SELECT p.*, c.nombre AS cat_nombre
         <button class="menu-toggle">☰</button>
         <ul class="nav-menu">
             <li><a href="index.php" class="active">Inicio</a></li>
-            <li><a href="catalogo.php">Catálogo</a></li>
+            <li><a href="catalogo.php">Catalogo</a></li>
             <li>
                 <a href="carrito.php" style="background: #d4af37; color: #1a1a1a; padding: 0.5rem 1rem; border-radius: 50px; font-weight: bold;">
                     🛒 Carrito (<?= $total_items_carrito ?>)
@@ -217,7 +217,7 @@ $productos_destacados = $pdo->query("SELECT p.*, c.nombre AS cat_nombre
     <div>
         <h1>Define tu Estilo</h1>
         <p>Descubre las últimas tendencias en moda con nuestra colección exclusiva de prendas elegantes y accesorios de alta calidad.</p>
-        <a href="catalogo.php" class="btn-hero">Ver Catálogo Completo</a>
+        <a href="catalogo.php" class="btn-hero">Ver Catalogo Completo</a>
     </div>
 </header>
 
