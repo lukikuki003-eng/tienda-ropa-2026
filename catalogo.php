@@ -359,7 +359,7 @@ foreach ($_SESSION['carrito'] as $item) {
         <div class="footer-section">
             <h3>Enlaces</h3>
             <a href="index.php">Inicio</a>
-            <a href="catalogo.php">Catálogo</a>
+            <a href="catalogo.php">Catalogo</a>
             <a href="carrito.php">Carrito</a>
             <a href="sistema.php">Administración</a>
         </div>
