@@ -269,7 +269,7 @@ foreach ($_SESSION['carrito'] as $item) {
         <button class="menu-toggle">☰</button>
         <ul class="nav-menu">
             <li><a href="index.php">Inicio</a></li>
-            <li><a href="catalogo.php">Catálogo</a></li>
+            <li><a href="catalogo.php">Catalogo</a></li>
             <li><a href="carrito.php" style="background: #d4af37; color: #1a1a1a; padding: 0.5rem 1rem; border-radius: 50px; font-weight: bold;">🛒 Carrito (<?= $total_items_carrito ?>)</a></li>
             <li><a href="sistema.php">Admin</a></li>
         </ul>
