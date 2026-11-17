@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS tienda_ropa CHARACTER SET utf8mb4;
-USE tienda_ropa;
+-- CREATE DATABASE IF NOT EXISTS tienda_ropa CHARACTER SET utf8mb4;
+-- USE tienda_ropa;
 
 -- Tabla 1: Categorías de ropa
 CREATE TABLE categorias (
