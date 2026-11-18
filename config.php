@@ -10,16 +10,15 @@ try {
         $user = $parsed['user'] ?? 'root';
         $pass = $parsed['pass'] ?? '';
     }
-    // 💻 ¿Estamos en local? (usamos los datos de XAMPP con contraseña)
+    // 💻 ¿Estamos en local?
     else {
         $host = 'localhost';
         $port = '3306';
         $dbname = 'tienda_ropa';
         $user = 'root';
-        $pass = 'luk251709';  // ⚠️ Tu contraseña local
+        $pass = 'luk251709';
     }
 
-    // Conectar
     $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
@@ -33,7 +32,6 @@ try {
         fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
 
-    // Crear admin por defecto si la tabla está vacía
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM administradores");
     $stmt->execute();
     if ($stmt->fetchColumn() == 0) {
