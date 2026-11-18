@@ -1,12 +1,28 @@
 FROM php:8.2-apache
 
-# Instalar extensiones de PHP
-RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring
+# Instalar dependencias del sistema necesarias
+RUN apt-get update && apt-get install -y \
+    libonig-dev \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Habilitar mod_rewrite
+# Instalar extensiones de PHP
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+    pdo \
+    pdo_mysql \
+    mysqli \
+    mbstring \
+    gd \
+    zip
+
+# Habilitar mod_rewrite de Apache
 RUN a2enmod rewrite
 
-# Configurar Apache para que escuche en el puerto 80
+# Configurar Apache para Railway
 RUN echo "Listen 80" > /etc/apache2/ports.conf
 
 # Configurar el DocumentRoot
@@ -22,5 +38,5 @@ RUN chmod -R 755 /var/www/html
 # Puerto
 EXPOSE 80
 
-# Iniciar Apache en primer plano (necesario para Railway)
+# Iniciar Apache
 CMD ["apache2-foreground"]
