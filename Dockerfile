@@ -1,12 +1,13 @@
 FROM php:8.2-apache
 
-# Instalar dependencias del sistema necesarias
+# Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    libonig-dev \
-    libzip-dev \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    libonig-dev \
+    libzip-dev \
+    libxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalar extensiones de PHP
@@ -17,26 +18,19 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     mysqli \
     mbstring \
     gd \
-    zip
+    zip \
+    xml
 
-# Habilitar mod_rewrite de Apache
+# Configurar Apache
 RUN a2enmod rewrite
+RUN echo "Listen 8080" > /etc/apache2/ports.conf
+RUN echo '<VirtualHost *:8080>\n    DocumentRoot /var/www/html\n    <Directory /var/www/html>\n        AllowOverride All\n        Require all granted\n    </Directory>\n</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
-# Configurar Apache para Railway
-RUN echo "Listen 80" > /etc/apache2/ports.conf
-
-# Configurar el DocumentRoot
-RUN echo '<VirtualHost *:80>\n    DocumentRoot /var/www/html\n    <Directory /var/www/html>\n        AllowOverride All\n        Require all granted\n    </Directory>\n</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
-
-# Copiar archivos del proyecto
+# Copiar archivos
 COPY . /var/www/html/
-
-# Permisos
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 755 /var/www/html
 
-# Puerto
-EXPOSE 80
+EXPOSE 8080
 
-# Iniciar Apache
 CMD ["apache2-foreground"]
